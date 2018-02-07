@@ -9,7 +9,6 @@ export class OauthReceiver extends React.Component {
   static propTypes = {
     tokenUrl: PropTypes.string.isRequired,
     clientId: PropTypes.string.isRequired,
-    clientSecret: PropTypes.string.isRequired,
     redirectUri: PropTypes.string.isRequired,
     appName: PropTypes.string,
     args: PropTypes.objectOf(
@@ -56,7 +55,6 @@ export class OauthReceiver extends React.Component {
       const {
         tokenUrl,
         clientId,
-        clientSecret,
         redirectUri,
         appName,
         args,
@@ -74,10 +72,7 @@ export class OauthReceiver extends React.Component {
       }
 
       const url = buildURL(`${tokenUrl}`, {
-        code,
         grant_type: 'authorization_code',
-        client_id: clientId,
-        client_secret: clientSecret,
         redirect_uri: redirectUri,
         ...args,
       });
@@ -85,9 +80,17 @@ export class OauthReceiver extends React.Component {
       const headers = new Headers({
         'User-Agent': appName,
         Accept: 'application/json',
+        'Content-Type': 'application/x-www-form-urlencoded',
       });
 
-      fetch2(url, { method: 'POST', headers })
+      fetch2(url, {
+        method: 'POST',
+        headers,
+        body: this.formatFormData({
+          client_id: clientId,
+          code,
+        }),
+      })
         .then(response => {
           const accessToken = response.access_token;
 
@@ -115,6 +118,11 @@ export class OauthReceiver extends React.Component {
       onAuthError(error);
     }
   };
+
+  formatFormData = data =>
+    Object.keys(data)
+      .map(key => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`)
+      .join('&');
 
   parseQuerystring = () => {
     const { location, querystring } = this.props;

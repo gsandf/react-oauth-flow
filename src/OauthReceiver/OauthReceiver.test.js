@@ -11,11 +11,9 @@ beforeAll(() => {
 
   api
     .post('/oauth2/token')
+    // , 'code=abc&client_id=abc')
     .query({
-      code: 'abc',
       grant_type: 'authorization_code',
-      client_id: 'abc',
-      client_secret: 'abcdef',
       redirect_uri: 'https://www.test.com/redirect',
     })
     .reply(200, {
@@ -55,7 +53,7 @@ test('Component <OauthReceiver />', async () => {
   );
 
   expect(wrapper.find('.processing').text()).toBe('yes');
-  await delay(10);
+  await delay(100);
   expect(wrapper.find('.processing').text()).toBe('no');
   expect(wrapper.find('.state').text()).toBe('/settings');
 

@@ -1,5 +1,5 @@
 {
-  "name": "react-oauth-flow",
+  "name": "@gsandf/react-oauth-flow",
   "version": "0.0.0-semantically-released",
   "main": "dist/react-oauth-flow.cjs.js",
   "jsnext:main": "dist/react-oauth-flow.esm.js",
