@@ -1,9 +1,9 @@
 {
   "name": "@gsandf/react-oauth-flow",
-  "version": "0.0.0-semantically-released",
-  "main": "dist/react-oauth-flow.cjs.js",
-  "jsnext:main": "dist/react-oauth-flow.esm.js",
-  "module": "dist/react-oauth-flow.esm.js",
+  "version": "1.1.0",
+  "main": "dist/@gsandf/react-oauth-flow.cjs.js",
+  "jsnext:main": "dist/@gsandf/react-oauth-flow.esm.js",
+  "module": "dist/@gsandf/react-oauth-flow.esm.js",
   "repository": "git@github.com:adambrgmn/react-oauth-flow.git",
   "author": "Adam Bergman <adam@fransvilhelm.com>",
   "license": "MIT",
